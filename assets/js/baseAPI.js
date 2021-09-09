@@ -13,8 +13,7 @@ $.ajaxPrefilter(function(options) {
 
   // 每次调用ajax前都会先调用ajaxPrefilter可以把 complete也挂在到这个上面
   options.complete = function(res) {
-    console.log('成功与否都会调用我');
-    console.log(res);
+
     // 在complete回调函数中，可以使res.responseJSON拿到服务器相应回来的数据
     if (res.responseJSON.status === 1 && res.responseJSON.message === '身份认证失败！') {
       localStorage.removeItem('token')

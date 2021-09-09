@@ -18,6 +18,7 @@ $(function() {
 
 // 获取用户信息
 function getUserInfo() {
+  console.log('主界面信息被调用了');
   $.ajax({
     method: 'GET',
     url: '/my/userinfo',
@@ -29,15 +30,7 @@ function getUserInfo() {
       if (res.status !== 0) return layui.layer.msg('获取用户信息失败')
       renderAvatar(res.data)
     },
-    complete: function(res) {
-      console.log('成功与否都会调用我');
-      console.log(res);
-      // 在complete回调函数中，可以使res.responseJSON拿到服务器相应回来的数据
-      if (res.responseJSON.status === 1 && res.responseJSON.message === '身份认证失败！') {
-        location.removeItem('token')
-        location.href = '/login.html'
-      }
-    }
+
   })
 
 }
@@ -45,7 +38,7 @@ function getUserInfo() {
 // 渲染用户的头像
 function renderAvatar(user) {
   // 1.获取用户名称
-  var renderName = user.username ? user.username : user.nickname
+  var renderName = user.nickname || user.username
     // 2.设置用户文本
   $('#welcome').html('欢迎&nbsp;&nbsp;' + renderName)
     // 3.按需渲染用户的头像
