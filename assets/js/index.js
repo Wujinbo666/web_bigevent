@@ -18,7 +18,7 @@ $(function() {
 
 // 获取用户信息
 function getUserInfo() {
-  console.log('主界面信息被调用了');
+
   $.ajax({
     method: 'GET',
     url: '/my/userinfo',
